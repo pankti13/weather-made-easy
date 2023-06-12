@@ -124,6 +124,7 @@ body {
 .units{
     position: relative;
     top:8px;
+    font-size:20px;
 }
 
 #description{
@@ -151,12 +152,15 @@ body {
 #celsius-link {
     text-decoration: none;
     padding: 1px 1px;
-    color: #FFFF00;
+    font-weight:bold;
+    color: black;
+    
     margin-left:2px;
 }
 
 #fahrenheit-link {
     text-decoration: none;
+    font-weight:bold;
     padding: 1px 2px;
     color: #FFFF00;
 }
@@ -165,7 +169,11 @@ body {
     font-weight: bold;
 }
 
-#celsius-link:hover,
+#celsius-link:hover{
+    cursor:default;
+    text-decoration: none;
+}
+
 #fahrenheit-link:hover {
     text-decoration: underline;
 }

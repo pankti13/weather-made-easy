@@ -109,9 +109,23 @@ function convertToFah(event) {
         let fahLink=document.querySelector("#fahrenheit-link");
         let celLink = document.querySelector("#celsius-link");
 
-        fahLink.style.border="2px solid black";
-        fahLink.style.borderRadius="5px";
-        celLink.style.border="";
+        fahLink.style.color="black";
+        fahLink.style.cursor = "default";
+
+        fahLink.addEventListener("mouseenter", function () {
+            fahLink.style.textDecoration = "none";
+        });   
+
+        celLink.style.color ="#FFFF00";
+        celLink.style.cursor ="pointer";
+        
+        celLink.addEventListener("mouseenter", function () {
+            celLink.style.textDecoration = "underline";
+        });
+
+        celLink.addEventListener("mouseleave", function () {
+            celLink.style.textDecoration = "none";
+        });
     }
 }
 
@@ -127,9 +141,23 @@ function convertToCel(event) {
         let fahLink = document.querySelector("#fahrenheit-link");
         let celLink = document.querySelector("#celsius-link");
 
-        celLink.style.border = "2px solid black";
-        celLink.style.borderRadius = "5px";
-        fahLink.style.border = "";
+        celLink.style.color = "black";
+        celLink.style.cursor = "default";
+
+        celLink.addEventListener("mouseenter", function () {
+            celLink.style.textDecoration = "none";
+        });
+
+        fahLink.style.color = "#FFFF00";
+        fahLink.style.cursor = "pointer";
+
+        fahLink.addEventListener("mouseenter", function () {
+            fahLink.style.textDecoration = "underline";
+        });
+
+        fahLink.addEventListener("mouseleave", function () {
+            fahLink.style.textDecoration = "none";
+        });
     }
 }
 
