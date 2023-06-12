@@ -1,39 +1,43 @@
 let apiKey = "57b2c40fdae71a6ba41d72685e3226e2";
 
-// Displaying real Day, Date and Time
-let now = new Date();
-let dayIndex = now.getDay();
+function showDayDateTime(timeStamp)
+{
+    // Displaying when the data was last updated
+    let now = new Date(timeStamp);
+    let dayIndex = now.getDay();
+    
+    //Day
+    let week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let day = week[dayIndex];
 
-//Day
-let week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-let day = week[dayIndex];
+    //Date
+    let date = now.getDate();
+    
+    //Month
+    let monthIndex = now.getMonth();
+    let months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let month = months[monthIndex];
+    
+    
+    // Time
+    let hrs = now.getHours();
+    if(hrs<10) hrs=`0${hrs}`;
 
-let dayDiv = document.querySelector("#today");
-dayDiv.innerHTML = `${day}`;
+    let mins = now.getMinutes();
+    if(mins<10) mins=`0${mins}`;
 
-//Date
-let date = now.getDate();
+    let dayDateTimeDiv = document.querySelector("#dayDateTime");
+    dayDateTimeDiv.innerHTML = `Last Updated: ${day}, ${month} ${date}, ${hrs}:${mins}`;
 
-//Month
-let monthIndex = now.getMonth();
-let months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-let month = months[monthIndex];
-
-
-// Time
-let hrs = now.getHours();
-let mins = now.getMinutes();
-
-let dayTimeDiv = document.querySelector("#dayTime");
-dayTimeDiv.innerHTML = `${month} ${date}, ${hrs}:${mins}`;
+}
 
 // Using OpenWeather API to fetch temperature, country code in real time
 function showTempUsingOpenApi(response) {
     let temperature = Math.round(response.data.main.temp);
     let city = response.data.name;
     let country = response.data.sys.country;
-    let humidity = response.data.main.humidity;
-    let windSpeed = response.data.wind.speed;
+    let humidity = Math.round(response.data.main.humidity);
+    let windSpeed = Math.round(response.data.wind.speed);
     let desc = response.data.weather[0].description;
 
     let minTemp = Math.round(response.data.main.temp_min);
@@ -57,6 +61,7 @@ function showTempUsingOpenApi(response) {
     let maxMinElement = document.querySelector("#maxMinTemp");
     maxMinElement.innerHTML = `${maxTemp}°C/${minTemp}°C`;
 
+    showDayDateTime(response.data.dt * 1000);
 }
 
 // Displaying real City 
