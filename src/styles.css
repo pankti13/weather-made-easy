@@ -5,7 +5,7 @@ body {
 
 .container {
     background: transparent;
-    margin: 70px auto;
+    margin: 40px auto;
     display: block;
     padding: 1% 4%;
     border: 4px solid black;
@@ -198,4 +198,17 @@ body {
 .dayElement h6 {
     margin: 5px;
     font-family: 'Roboto', sans-serif;
+}
+
+.gitSource{
+    margin:-37px 113px;
+}
+
+.gitSource a{
+    /* color:red; */
+    text-decoration: none;
+}
+
+.gitSource a:hover{
+    text-decoration: underline;
 }
