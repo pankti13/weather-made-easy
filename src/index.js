@@ -61,6 +61,9 @@ function showTempUsingOpenApi(response) {
     let maxMinElement = document.querySelector("#maxMinTemp");
     maxMinElement.innerHTML = `${maxTemp}°C/${minTemp}°C`;
 
+    let mainIconElement = document.querySelector("#mainIcon");
+    mainIconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
     showDayDateTime(response.data.dt * 1000);
 }
 

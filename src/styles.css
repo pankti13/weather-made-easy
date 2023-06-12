@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-    margin: 45px auto; 
+    margin: 35px auto; 
 }
 
 .innerContainer{
@@ -88,10 +88,19 @@ body {
     font-size:20px;
 }
 
-.mainIcon {
-    font-size: 125px;
+#mainIcon {
+    height:212px;
+    width:190px;
     padding: 20px;
     margin: 0 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    transition: transform 0.3s ease;
+}
+
+#mainIcon:hover{
+    transform: scale(1.1);
 }
 
 .current {
@@ -102,6 +111,19 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: bold;
     text-align: center;
+}
+
+#current-temp{
+    font-size:60px;
+}
+
+#maxMinTemp{
+    font-size:20px;
+}
+
+.units{
+    position: relative;
+    top:8px;
 }
 
 #description{
