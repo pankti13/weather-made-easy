@@ -31,6 +31,74 @@ function showDayDateTime(timeStamp)
 
 }
 
+function displayForecast()
+{
+    let forecastDiv=document.querySelector("#weather-forecast");
+
+    let forecastHTML = `<div class="row rowFifth justify-content-center">`;
+    let days=["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+    days.forEach(function(day)
+    {
+        forecastHTML += 
+            `
+                <div class="col-2 dayElement">
+                    <h5 id="forecast-day">${day}</h5>
+                    <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="clear" id="iconMini" />
+                    <h6 id="forecastMaxMin">35°C/23°C</h6>
+                </div>
+            `;
+    }
+    )
+
+    forecastHTML = forecastHTML + `</div>`;
+    forecastDiv.innerHTML = forecastHTML;
+}
+
+function getForecastDay(dateDescription,dayParameter)
+{
+    let now= new Date(dateDescription);
+    let dayIndex = now.getDay();
+
+    //Day
+    let week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let day = week[dayIndex];
+
+    let forecastDay=document.querySelectorAll("#forecast-day");
+    forecastDay[dayParameter-1].innerHTML=day;
+}
+
+function displayForecastIcon(iconIdx,day)
+{
+    let miniIconElement = document.querySelectorAll("#iconMini");
+    miniIconElement[day-1].setAttribute("src", `https://openweathermap.org/img/wn/${iconIdx}@2x.png`);
+}
+
+function displayForecastMaxMin(max,min,day)
+{
+    let temp=document.querySelectorAll("#forecastMaxMin");
+    temp[day-1].innerHTML=`${max}°C/${min}°C`;
+}
+
+function displayForecastDetails(response)
+{
+    for(let day=1;day<=5;day++)
+    {
+        let forecastMax=Math.round(response.data.daily[day].temp.max);
+        let forecastMin=Math.round(response.data.daily[day].temp.min);
+
+        getForecastDay(response.data.daily[day].dt *1000,day);
+        displayForecastIcon(response.data.daily[day].weather[0].icon,day);
+        displayForecastMaxMin(forecastMax,forecastMin,day);
+    }
+}
+
+function showForecastDetails(lat,lon)
+{
+    let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    axios.get(forecastUrl).then(displayForecastDetails);
+}
+
 // Using OpenWeather API to fetch temperature, country code in real time
 function showTempUsingOpenApi(response) {
     let temperature = Math.round(response.data.main.temp);
@@ -64,8 +132,15 @@ function showTempUsingOpenApi(response) {
     let mainIconElement = document.querySelector("#mainIcon");
     mainIconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 
+    // Latitude and Longitude using OpenWeather API
+    let latitude = response.data.coord.lat;
+    let longitude = response.data.coord.lon;
+
     showDayDateTime(response.data.dt * 1000);
+    showForecastDetails(latitude,longitude);
 }
+
+displayForecast();
 
 // Displaying real City 
 function displayCity(event) {
